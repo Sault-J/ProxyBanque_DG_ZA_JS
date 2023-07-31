@@ -6,18 +6,24 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.dto.ClientDTO;
 import com.example.entities.Client;
 import com.example.entities.Conseiller;
 import com.example.repository.ProxyClientDAO;
+import com.example.repository.ProxyConseillerDAO;
+
 
 @Service
 public class ClientServiceImpl implements ClientService {
 
 	private ProxyClientDAO clientDAO;
 	
+	
+	
 	@Autowired
 	public ClientServiceImpl(ProxyClientDAO clientDAO1) {
 		clientDAO = clientDAO1;
+		
 	}
 	
 	
@@ -30,6 +36,23 @@ public class ClientServiceImpl implements ClientService {
 	@Override
 	public Client saveClient(Client client) {
 		// TODO Auto-generated method stub
+		
+		/*
+		Client a = new Client();
+		
+		a.setId(clientDTO.getId());
+		a.setNom(clientDTO.getNom());
+		a.setPrenom(clientDTO.getPrenom());
+		a.setAdresse(clientDTO.getAdresse());
+		a.setCodePostal(clientDTO.getCodePostal());
+		a.setVille(clientDTO.getVille());
+		a.setTel(clientDTO.getTel());
+				
+		Long id = clientDTO.getConseiller_id();
+		Optional<Conseiller> conseiller = conseillerDAO.findById(id);
+		a.setConseiller(conseiller.orElse(null));
+		*/
+		
 		return clientDAO.save(client);
 	}
 
@@ -42,19 +65,20 @@ public class ClientServiceImpl implements ClientService {
 	@Override
 	public void deleteClientById(Long id) {
 		// TODO Auto-generated method stub
-
+		clientDAO.deleteById(id);
 	}
 
 	@Override
 	public Client updateClient(Client client) {
 		// TODO Auto-generated method stub
-		return null;
+		Long id = client.getId();
+		return (clientDAO.existsById(id)) ? (clientDAO.save(client)) : (clientDAO.save(client));
 	}
 
 	@Override
 	public boolean isClientIdExists(Long id) {
 		// TODO Auto-generated method stub
-		return false;
+		return clientDAO.existsById(id);
 	}
 	
 	

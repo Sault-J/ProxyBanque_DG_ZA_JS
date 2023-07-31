@@ -9,6 +9,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MapsId;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Client {
@@ -25,9 +27,18 @@ public class Client {
 	private String Tel;
 	
 	@JsonIgnore
-	@ManyToOne(cascade = {CascadeType.PERSIST})
+	@ManyToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name="conseiller_id")
 	private Conseiller conseiller;
+	
+	@OneToOne(mappedBy = "client", cascade = CascadeType.ALL)
+	@JoinColumn(name="compte_courant_id")
+	private CompteCourant compteCourant;
+	
+	@OneToOne(mappedBy = "client", cascade = CascadeType.ALL)
+	@JoinColumn(name="compte_epargne_id")
+	private CompteEpargne compteEpargne;
+
 	
 	public Long getId() {
 		return Id;
@@ -72,18 +83,51 @@ public class Client {
 		Tel = tel;
 	}
 	
+	
+	
+	
+	public CompteEpargne getCompteEpargne() {
+		return compteEpargne;
+	}
+	public void setCompteEpargne(CompteEpargne compteEpargne) {
+		this.compteEpargne = compteEpargne;
+	}
+	public CompteCourant getCompteCourant() {
+		return compteCourant;
+	}
+	public void setCompteCourant(CompteCourant compteCourant) {
+		this.compteCourant = compteCourant;
+	}
 	public Client() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Client(String name) {
+	public Client(String name,CompteCourant compteCourant1,CompteEpargne compteEpargne1) {
 		nom = name;
+		this.compteCourant = compteCourant1;
+		if (compteCourant != null) {
+			compteCourant.setClient(this);
+		}	
+		this.compteEpargne = compteEpargne1;
+		if (compteEpargne != null) {
+			compteEpargne.setClient(this);
+		}
+
 	}
+	
+	
 	public Conseiller getConseiller() {
 		return conseiller;
 	}
 	public void setConseiller(Conseiller conseiller) {
 		this.conseiller = conseiller;
+	}
+	
+
+	@Override
+	public String toString() {
+		return "Client [Id=" + Id + ", nom=" + nom + ", prenom=" + prenom + ", adresse=" + adresse + ", codePostal="
+				+ codePostal + ", ville=" + ville + ", Tel=" + Tel + "]";
 	}
 	
 	

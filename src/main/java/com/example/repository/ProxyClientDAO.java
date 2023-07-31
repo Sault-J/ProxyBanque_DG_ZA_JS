@@ -6,4 +6,6 @@ import com.example.entities.Client;
 
 public interface ProxyClientDAO extends JpaRepository<Client, Long> {
 
+
+
 }

@@ -18,7 +18,7 @@ public class Conseiller {
 	private Long id;
 	private String nom;
 	
-	@OneToMany(mappedBy = "conseiller",cascade= {CascadeType.PERSIST})
+	@OneToMany(mappedBy = "conseiller",cascade= {CascadeType.ALL})
 	private List<Client> clients = new ArrayList<>();
 	
 	public Long getId() {
@@ -46,6 +46,10 @@ public class Conseiller {
 	
 	public Conseiller(String name) {
 		nom = name;
+	}
+	@Override
+	public String toString() {
+		return "Conseiller [id=" + id + ", nom=" + nom + "]";
 	}
 	
 	

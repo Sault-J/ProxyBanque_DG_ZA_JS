@@ -45,19 +45,20 @@ private ProxyConseillerDAO conseillerDAO;
 	@Override
 	public void deleteConseillerById(Long id) {
 		// TODO Auto-generated method stub
-		
+		conseillerDAO.deleteById(id);
 	}
 
 	@Override
 	public Conseiller updateConseiller(Conseiller conseiller) {
 		// TODO Auto-generated method stub
-		return null;
+		Long id = conseiller.getId();
+		return (conseillerDAO.existsById(id)) ? (conseillerDAO.save(conseiller)) : (conseillerDAO.save(conseiller));
 	}
 
 	@Override
 	public boolean isConseillerIdExists(Long id) {
 		// TODO Auto-generated method stub
-		return false;
+		return conseillerDAO.existsById(id);
 	}
 	
 	

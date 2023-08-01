@@ -52,8 +52,8 @@ public class DBinit {
 		B.setConseiller(C);
 		
 		
-		C.getClients().add(A);
-		C.getClients().add(B);
+		C.ajouterClient(A);
+		C.ajouterClient(B);
 		
 		daoClient.saveAll(List.of(
 				A,

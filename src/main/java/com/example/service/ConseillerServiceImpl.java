@@ -6,9 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.entities.Client;
 import com.example.entities.Conseiller;
-import com.example.repository.ProxyClientDAO;
 import com.example.repository.ProxyConseillerDAO;
 
 @Service

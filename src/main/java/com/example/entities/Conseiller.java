@@ -52,5 +52,11 @@ public class Conseiller {
 		return "Conseiller [id=" + id + ", nom=" + nom + "]";
 	}
 	
+	public void ajouterClient(Client client) {
+		if(clients.size() < 10) {
+			this.clients.add(client);
+		}
+	}
+	
 	
 }

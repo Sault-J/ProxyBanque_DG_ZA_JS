@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.entities.Compte;
-import com.example.repository.ProxyClientDAO;
 import com.example.repository.ProxyCompteDAO;
 
 @Service
